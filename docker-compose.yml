@@ -1,0 +1,30 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./php:/var/www/html
+    depends_on:
+      - php
+#php-fpm 8.2 
+  php:
+    build: .
+    container_name: php-fpm
+    volumes:
+      - ./php:/var/www/html
+
+  db:
+    #refer to the official image in Docker Hub
+    image: bitnami/mysql:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - MYSQL_ROOT_PASSWORD=root_password
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
