@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Ensure the repository is present
+      git:
+        repo: 'git@github.com:Ac3slide/literate-fishstick.git'
+        dest: /home/literate-fishstick
+        version: "{{ branch_name }}"
+        force: yes
+
+    - name: Restart Docker services
+      shell: docker compose down && docker compose up -d
+      args:
+        chdir: /home/literate-fishstick

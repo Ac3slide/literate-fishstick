@@ -11,7 +11,7 @@ services:
       - ./php:/var/www/html
     depends_on:
       - php
-#php-fpm 8.2 
+
   php:
     image: bitnami/php-fpm:8.2
     container_name: php-fpm
@@ -19,12 +19,16 @@ services:
       - ./php:/var/www/html
 
   db:
-    #refer to the official image in Docker Hub
     image: bitnami/mysql:latest
+    container_name: db
     environment:
       - ALLOW_EMPTY_PASSWORD=no
       - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=connection_check
+      - MYSQL_USER=sqluser
+      - MYSQL_PASSWORD=sqlpassword123
     volumes:
       - db_data:/var/lib/mysql
+
 volumes:
   db_data:
