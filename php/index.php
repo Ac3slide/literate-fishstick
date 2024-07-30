@@ -1,8 +1,8 @@
 <?php
-$servername = "";
-$username = "";
-$password = "";
-$dbname = "";
+$servername = "db";
+$username = "sqluser";
+$password = "sqlpassword123";
+$dbname = "connection_check";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
