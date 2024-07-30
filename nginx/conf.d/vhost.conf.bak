@@ -8,6 +8,31 @@ server {
 }
 
 server {
+    listen 80;
+    server_name www.dbcheck2.kadabratester1.com;
+
+    location / {
+        return 301 https://dbcheck2.kadabratester1.com$request_uri;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
+
+#server {
+   # listen 443 ssl;
+   # server_name dbcheck2.kadabratester1.com;
+
+  #  ssl_certificate /etc/nginx/certs/dbcheck2.kadabratester1.com/fullchain.pem;
+ #   ssl_certificate_key /etc/nginx/certs/dbcheck2.kadabratester1.com/privkey.pem;
+
+#    location / {
+#        return 301 https://www.dbcheck2.kadabratester1.com$request_uri;
+ #   }
+#}
+
+server {
     listen 443 ssl;
     server_name dbcheck2.kadabratester1.com;
 
